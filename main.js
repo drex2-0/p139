@@ -21,6 +21,9 @@ var ball = {
     dy:3
 }
 gamestatus="";
+rightWristx="";
+rightWristy="";
+scorerightWrist="";
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent('canvas');
@@ -28,7 +31,26 @@ function setup(){
 	video.size(700,600);
   
   video.hide();
+  posenet=ml5.poseNet(video,modelloaded);
+	posenet.on('pose',gotposes);
 }
+
+function modelloaded()
+{
+	console.log("Model Is Loaded");
+}
+
+function gotposes(results)
+{
+	if(results.length>0)
+	{
+		console.log(results);
+		rightWristx=results[0].pose.rightWrist.x;
+		rightWristy=results[0].pose.rightWrist.y;
+    scorerightWrist=results[0].pose.keypoints[10].score;
+	}
+}
+
 
 function startgame()
 {
