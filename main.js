@@ -70,7 +70,14 @@ image(video,0,0,700,600);
  fill("black");
  stroke("black");
  rect(0,0,20,700);
- 
+  
+ if(scorerightWrist>0.2)
+ {
+  fill("red");
+  stroke("red");
+  circle(rightWristx,rightWristy,30);
+ }
+
    //funtion paddleInCanvas call 
    paddleInCanvas();
  
@@ -78,7 +85,7 @@ image(video,0,0,700,600);
    fill(250,0,0);
     stroke(0,0,250);
     strokeWeight(0.5);
-   paddle1Y = mouseY; 
+   paddle1Y = rightWristy; 
    rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
    
    
@@ -197,4 +204,11 @@ function paddleInCanvas(){
   if(mouseY < 0){
     mouseY =0;
   }  
+}
+
+function restart()
+{
+  loop();
+  pcscore=0;
+  playerscore=0;
 }
